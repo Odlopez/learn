@@ -1,15 +1,16 @@
-name = input('Привет, как тебя зовут?: ')
-answer = input('Любишь играть в майнкрафт?: ')
+import re
+res = ''
 
-if answer == 'да' or answer == 'конечно':
-    two_answer = input('Спросим у папы, можно ли поиграть?: ')
-    if two_answer == 'да':
-        papa_answer = input('Папа, можно поиграть?: ')
-        if papa_answer == 'нет':
-            print('Извини, ' + name + ', папа не разрешает!')
-        else:
-            print('Ура! Стоп! Но ведь 7 дней еще не прошло... Запрет на игры еще действует. Извини, но нельзя!')
-    else:
-        print('Ну, тогда давай просто поиграй в динозавры!')
-else:
-    print('Что? Я тебе не верю, ' + name + '!!!! Ты - обманщик!!!')
+with open('dataset_3363_2.txt', 'r') as text:
+  r = text.readline().strip()
+  rxd = r'\d+'
+  rxD = r'\D{1}'
+  letters = [a for a in re.split(rxd, r) if a != '']
+  numbers = [int(a) for a in re.split(rxD, r) if a != '']
+
+  for i in range(len(letters)):
+    res += letters[i] * numbers[i]
+
+with open('dataset_3363_2.txt', 'w') as text:
+  text.write(res + '\n')
+  
