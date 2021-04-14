@@ -1,13 +1,20 @@
-# Ссыль на доку (быстрый старт)
-# https://docs.python-requests.org/en/latest/user/quickstart/
 import requests
 
 r = requests.post('https://echo.htmlacademy.ru', data={'test': "ОК"})
 
-rr = requests.get('https://api.github.com/events')
+rr = requests.get('http://example.com')
 
-print(r.encoding)
+param = {"date": "14-04-2021", "login": "shmyaka", "rain": "nope"}
+rx = requests.get('http://example.com', params=param)
 
+url = 'http://bla-bla-bla.com'
+cookies = {'taram': 'param'}
+
+rc = requests.get(url, cookies=cookies)
+
+# print(r.encoding)
+print(rc.text)
+print(rx.url)
 # print(rr.json())
-print(r.text)
-print(r.content)
+# print(rr.text)
+# print(rr.content)
