@@ -52,3 +52,39 @@ with open('dataset_3380_5.txt', 'w') as text:
   for key in dict:
     text.write(str(key) + ' ' + (str(dict[key]['total'] / dict[key]['count']) if dict[key]['total'] and dict[key]['count'] else '-') + '\n')
 
+# Второй вариант решения
+
+# # Снова создаем неочевидный список, но он более ёмкий, нежели словарь
+# res = [[0, 0] for i in range(11)]
+
+# # Создаем фунцию, для наполнения нашего списка
+# def fillArr(classNum, height):
+#   res[int(classNum) - 1][0] += 1
+#   res[int(classNum) - 1][1] += int(height)
+
+
+# with open('dataset_3380_5.txt') as text:
+#   for row in text:
+#     # проходим по строчкам, выделяем из них цифры и наполняем наш массив
+#     x = [it for it in row.strip().split() if it.isdigit()]
+#     fillArr(x[0], x[1])
+
+# with open('dataset_3380_5.txt', 'w') as text:
+#   # Записываем в файл данные из нашего списка
+#   # предварительно обработав их
+#   for i, el in enumerate(res):
+#     text.write(str(i + 1) + ' ' + (str(el[1] / el[0]) + '\n') if el[0] else '-\n')
+
+
+# Наш вывод должен выглядеть так:
+# 1 124.58333333333333
+# 2 128.83333333333334
+# 3 133.66666666666666
+# 4 140.3
+# 5 147.0
+# 6 155.0
+# 7 158.2
+# 8 164.0
+# 9 169.4
+# 10 171.2
+# 11 174.66666666666666
