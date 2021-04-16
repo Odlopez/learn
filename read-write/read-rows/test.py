@@ -35,3 +35,25 @@ res_arr = [x[1] for x in res_arr if x[0] == max_count]
 
 print(min(res_arr), max_count)
 
+# Второй вариант решения. Более дурацкий, зато с lambda
+
+res = {}
+arr = []
+
+with open('dataset_3363_3.txt') as text:
+  for row in text:
+    for word in row.strip().lower().split():
+      if res.get(word):
+        res[word] += 1
+      else:
+        res[word] = 1
+
+for it in res.items():
+  arr.append([i for i in it])
+
+arr = sorted(arr, key=lambda x: int(x[1]))
+max = arr[len(arr) - 1][1]
+
+arr = sorted(list(filter(lambda x: x[1] == max, arr)), key=lambda x: x[0])
+
+print(*arr[0])
