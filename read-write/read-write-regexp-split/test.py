@@ -21,3 +21,19 @@ with open('dataset_3363_2.txt', 'r') as text:
 with open('dataset_3363_2.txt', 'w') as text:
   text.write(res + '\n')
   
+# Второй вариант, почти такой же, как и первый:
+
+# words = []
+# nums = []
+
+# with open('dataset_3363_2.txt') as text:
+#   row = text.readline().strip()
+#   words = [i for i in re.split(r'\d+', row) if i]
+#   nums = [int(i) for i in re.split(r'\D+', row) if i]
+
+# with open('dataset_3363_2.txt', 'w') as text:
+#   for i, it in  enumerate(words):
+#      text.write(it * nums[i])
+
+# Наш вывод должен быть:
+# wwwwwwwwwwwwwwwppppppppppppppppppppIvvvvvvvvvvvvvOOOOOOOOOOOwwwwwwwwwwwwwrrrrrrrrrrUUUUUUUUUUUUUUUUUUUvvvvvvvvvvvvvvvvSSSSSSSSSSSSSSEEEeettttttttttttttttttkkkkkkkkkAAMMMMMMMMMMMMMMMMMzzzzzzzzzzuuuuuuuuuuuuuuuuuussssssssssssssVVVVVVVVVVVVVwwwwwwwwwwwwwwBBBBBBBBBBvvvvvvvvvvLLLLLLLLLLLLLRRRRRRRRRRRRRRRTTxxxxxxxxxxoooooooooooohhhhhhhhhhhhhhhhhhhhrwwwwwwwwwwwwwwwwHHHHHHdddddddddddddddcccSOOOOOOOOOOOO
