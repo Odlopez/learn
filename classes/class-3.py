@@ -51,8 +51,14 @@
 # Для каждого запроса выведите в отдельной строке слово "Yes", 
 # если класс 1 является предком класса 2, и "No", если не является.
 
+
+# СПОСОБ ЧЕРЕЗ РЕКУРСИЮ
+
+# Создаем объект для хранения наших данных
 classes = {}
 
+# Функция, которая создает объект класса, если его 
+# не было в нашем списке classes
 def createClass(name):
   if not classes.get(name):
     classes[name] = {
@@ -60,15 +66,21 @@ def createClass(name):
       'children': set([name])
     }
 
+# Записываем ребенка в объект к родителю, от
+# которого идет наследование
 def setChild(parent, child):
+  # Созаем объект родителя, если он не встречался раньше
   if not classes.get(parent):
     createClass(parent)
     
+  # Добавляем ребенка в список наследователей класса-родителя
   classes[parent]['children'].add(child)
   
+  # А также добавляем ребенка ко всем родетелям родителя
   for par in classes[parent]['parents']:
     setChild(par, child)
-    
+
+# Функция, которая создает связи классов из данных пользователя
 def setClass(name, *par):
   if not classes.get(name):
     createClass(name)
@@ -77,23 +89,35 @@ def setClass(name, *par):
     classes[name]['parents'].add(x)
     setChild(x, name)
     
+# Функция, проверяющая является ли ребенок потомков заданного родителя
 def isParent(parent, child):
   res = 0
 
+  # Если имени класса родителя или потомка не существует в нашем
+  # перечне classes, то возвращаем 0
   if not classes.get(parent) or not classes.get(child):
     return 0
-  elif parent not in classes[child]['parents'] and not len(classes[child]['parents']) and parent != child:
+  # Если список родителей у потомка пуст и родитель не равен потомку, то возвращаем 0
+  elif len(classes[child]['parents']) == 0 and parent != child:
     return 0
+  # Если родителей находится в списке прямых предков ребенка
+  #  или родитель равен ребенку, то возвращаем 1
   elif parent in classes[child]['parents'] or parent == child:
     return 1
+  # Иначе, рекурсивно проходим по всем прямым предкам класса-ребенка
+  # и, суммируем результаты, если хотя бы один раз родитель встретится,
+  # значит класс-ребенок является потомком изначального класса-предка
   else:
     for i in classes[child]['parents']:
       res += isParent(parent, i)
     return res
     
+# Функция, которая печатает ответ Да или Нет, в зависимости
+# от того, какую цифру выдаст функция isParent - ноль или больше
 def isAnswer(parent, child):
   print('Yes' if isParent(parent, child) else 'No')
 
+# Дальше идёт обработка данных введенных пользователем
 n = int(input())
 
 for x in range(n):
@@ -111,6 +135,77 @@ q = int(input())
 for i in range(q):
     s = input().split()
     isAnswer(*s)
+
+
+
+# СПОСОБ ЧЕРЕЗ СОЗДАНИЕ ПОЛНОГО СПИСКА ВСЕХ ДЕТЕЙ
+
+# # Создаем объект для хранения наших данных
+# classes = {}
+
+# # Функция, которая создает объект класса, если его 
+# # не было в нашем списке classes
+# def createClass(name):
+#   if not classes.get(name):
+#     classes[name] = {
+#       'parents': set(),
+#       'children': set([name])
+#     }
+    
+# # Функция, которая добавляет класс в список предков
+# def setParent(name, parent):
+#   classes[name]['parents'].add(parent)
+
+# # Функция, которая добавляет перечень потомков к родителю и родителям его родителей
+# # В качестве второго аргумента - set из всех потомков
+# def setChilds(parent, childs):
+#   createClass(parent)
+    
+#   classes[parent]['children'].update(childs)
+  
+#   # Проходим по списку всех родителей родителя и заново запускаем эту функцию
+#   for par in classes[parent]['parents']:
+#     setChilds(par, childs)
+    
+# # Создаем объект класса со связями
+# def setClass(name, *par):
+#   # Непосредственно вызываем создание объекта класса,
+#   # если он уже создан, повторно ничего не создается
+#   createClass(name)
+    
+#   # проходим по списку родителей
+#   for x in par:
+#     # Добавляем каждого родителя в список предков искомого класса
+#     setParent(name, x)
+#     # Вызываем функцию добавления детей для каждого родителя
+#     # и передаем в неё список всех детей искомого класса 
+#     # (сам же этот класс также считается потомком самого себя)
+#     setChilds(x, classes[name]['children'])
+    
+# # Проверяем есть ли запрошенные классы в нашем перечне classes
+# # а также есть ли класс-потомок в списке детей класса-родителя
+# def getRelation(nameParent, nameChild):
+#   print('No' if not classes.get(nameParent) or not classes.get(nameChild) else 'Yes' if nameChild in classes[nameParent]['children'] else 'No')
+
+# # Дальше идёт обработка данных введенных пользователем
+# n = int(input())
+
+# for x in range(n):
+#     s = input().split(' : ')
+#     name = s[0]
+#     par = []
+    
+#     if (len(s) > 1):
+#         par = s[1].split()
+    
+#     setClass(name, *par)
+
+# q = int(input())
+
+# for i in range(q):
+#     s = input().split()
+#     getRelation(*s)
+
 
 # Sample Input:
 
