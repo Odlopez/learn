@@ -6,21 +6,22 @@
 # В исходном тексте не встречаются цифры, так что код однозначно интерпретируем.
 
 import re
+
 res = ''
 
 with open('dataset_3363_2.txt', 'r') as text:
-  r = text.readline().strip()
-  rxd = r'\d+'
-  rxD = r'\D{1}'
-  letters = [a for a in re.split(rxd, r) if a != '']
-  numbers = [int(a) for a in re.split(rxD, r) if a != '']
+    r = text.readline().strip()
+    rxd = r'\d+'
+    rxD = r'\D{1}'
+    letters = [a for a in re.split(rxd, r) if a != '']
+    numbers = [int(a) for a in re.split(rxD, r) if a != '']
 
-  for i in range(len(letters)):
-    res += letters[i] * numbers[i]
+    for i in range(len(letters)):
+        res += letters[i] * numbers[i]
 
 with open('dataset_3363_2.txt', 'w') as text:
-  text.write(res + '\n')
-  
+    text.write(res + '\n')
+
 # Второй вариант, почти такой же, как и первый:
 
 # words = []

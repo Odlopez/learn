@@ -16,7 +16,7 @@ link = ''
 
 # читаем файл и достаем из него ссылку для запроса
 with open('dataset_3378_2.txt', 'r') as text:
-  link = text.readline().strip()
+    link = text.readline().strip()
 
 # посылаем запрос на искомый адрес
 r = requests.get(link)

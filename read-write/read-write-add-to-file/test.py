@@ -14,32 +14,31 @@
 # В качестве ответа на задание прикрепите полученный файл со средними оценками по каждому ученику и одной 
 # строкой со средними оценками по трём предметам.
 
-res = {1:0, 2:0, 3:0}
+res = {1: 0, 2: 0, 3: 0}
 count = 0
 res_arr = []
 end_str = ''
 
 with open('dataset_3363_4.txt', 'r') as text:
-  for row in text:
-    res_arr.append([])
+    for row in text:
+        res_arr.append([])
 
-    for i, ass in enumerate(row.strip().split(';')):
-      if ass.isdigit():
-        res[i] += int(ass)
-        res_arr[count].append(int(ass))
+        for i, ass in enumerate(row.strip().split(';')):
+            if ass.isdigit():
+                res[i] += int(ass)
+                res_arr[count].append(int(ass))
 
-    count += 1
+        count += 1
 
 with open('dataset_3363_4.txt', 'w') as text:
-  for x in res_arr:
-    text.write(str((x[0] + x[1] + x[2]) / 3) + '\n')
+    for x in res_arr:
+        text.write(str((x[0] + x[1] + x[2]) / 3) + '\n')
 
 for x in res:
-  end_str += str(res[x] / len(res_arr)) + ' '
+    end_str += str(res[x] / len(res_arr)) + ' '
 
 with open('dataset_3363_4.txt', 'a') as text:
-  text.write(end_str)
-
+    text.write(end_str)
 
 # Второй способ решения:
 
@@ -48,6 +47,7 @@ with open('dataset_3363_4.txt', 'a') as text:
 # но с массивом менее многословно
 res = [0, 0, 0, 0, []]
 
+
 # функция, с помощью которой мы будем наполнять наш искомый массив:
 # в первый элемент - накапливаем все оценки по математике
 # во второй - все оценки по физике
@@ -55,24 +55,25 @@ res = [0, 0, 0, 0, []]
 # в четвертый - считаем общее количество учеников
 # в пятый элемент (подмассив) накапливаем средние оценки по каждому ученику подряд 
 def foo(math, physic, lang):
-  res[0] += int(math)
-  res[1] += int(physic)
-  res[2] += int(lang)
-  res[3] += 1
-  res[4].append((int(math) + int(physic) + int(lang)) / 3)
+    res[0] += int(math)
+    res[1] += int(physic)
+    res[2] += int(lang)
+    res[3] += 1
+    res[4].append((int(math) + int(physic) + int(lang)) / 3)
+
 
 # выделяем из файла строки, а из них только числа - интересующие нас оценки
 with open('dataset_3363_4.txt') as text:
-  for row in text:
-    s = [it for it in row.strip().split(';') if it.isdigit()]
-    foo(s[0], s[1], s[2])
+    for row in text:
+        s = [it for it in row.strip().split(';') if it.isdigit()]
+        foo(s[0], s[1], s[2])
 
 # теперь проходим по нашему массиву и записываем в файл оценки
 with open('dataset_3363_4.txt', 'w') as text:
-  for it in res[4]:
-    text.write(str(it) + '\n')
-  for i in range(3):
-    text.write(str(res[i] / res[3]) + ' ')
+    for it in res[4]:
+        text.write(str(it) + '\n')
+    for i in range(3):
+        text.write(str(res[i] / res[3]) + ' ')
 
 # Наш вывод должен быть таким:
 # 72.0
@@ -231,4 +232,4 @@ with open('dataset_3363_4.txt', 'w') as text:
 # 53.333333333333336
 # 63.666666666666664
 # 70.33333333333333
-# 62.3525641025641 65.26282051282051 63.39102564102564 
+# 62.3525641025641 65.26282051282051 63.39102564102564

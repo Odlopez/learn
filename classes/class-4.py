@@ -19,17 +19,19 @@
 # импортируем модуль времени
 import time
 
+
 # создаем класс, с методом log,
 # который выводит на печать время, а также сообщение 
 class Loggable:
-  def log(self, msg):
-    print(str(time.ctime()) + ": " + str(msg))
+    def log(self, msg):
+        print(str(time.ctime()) + ": " + str(msg))
+
 
 # создаем класс, унаследованный от класса list
 # и Loggable
 class LoggableList(list, Loggable):
-  def append(self, x):
-    # вызываем функцию append, которая стандартная для всех списов
-    super().append(x)
-    # вызываем функцию создания логов унаследованную от класса выше
-    super().log(x)
+    def append(self, x):
+        # вызываем функцию append, которая стандартная для всех списов
+        super().append(x)
+        # вызываем функцию создания логов унаследованную от класса выше
+        super().log(x)

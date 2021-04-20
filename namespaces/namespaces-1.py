@@ -75,41 +75,44 @@
 # Создаем словарь, который будет отвечать за простраства имен
 # Глобальное пространство имен в нём уже есть изначально
 namespaces = {
-  'global': {
-    'parent': None
-  }
+    'global': {
+        'parent': None
+    }
 }
+
 
 # Функция, которая возвращает имя пространство имен, из которого будет взята переменная
 # Рекурсивно вызываем эту функцию по отношению к родительскому пространству имен, 
 # если в искомом пространстве переменная не обнаружена 
 def getNameSpaces(name, var):
-  return namespaces[name].get(var) or (getNameSpaces(namespaces[name]['parent'], var) if namespaces[name].get('parent') else None)
+    return namespaces[name].get(var) or (
+        getNameSpaces(namespaces[name]['parent'], var) if namespaces[name].get('parent') else None)
+
 
 # Функция, которая в зависимости от запроса:
 #  - создает пространство имен
 #  - добавляет в существующее пространство переменную
 #  - выводит на экран пространство имен, из которого будет взята заданная переменная
 def crateSpaces(request, name, var):
-  if request == 'create':
-    namespaces[name] = {
-      'parent': var
-    }
+    if request == 'create':
+        namespaces[name] = {
+            'parent': var
+        }
 
-  if request == 'add':
-    namespaces[name][var] = name
+    if request == 'add':
+        namespaces[name][var] = name
 
-  if request == 'get':
-    print(getNameSpaces(name, var))
+    if request == 'get':
+        print(getNameSpaces(name, var))
+
 
 # Получаем от пользователя число количества запросов
 n = int(input())
 
 # В цикле получаем от пользователя данные и заводим их в нашу функцию
 for i in range(n):
-  x = input().split()
-  crateSpaces(*x)
-
+    x = input().split()
+    crateSpaces(*x)
 
 # Test input:
 # 9

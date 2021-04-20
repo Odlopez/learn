@@ -18,16 +18,16 @@ res_arr = []
 count_arr = []
 
 with open('dataset_3363_3.txt', 'r') as text:
-  for row in text:
-    for word in row.strip().lower().split():
-      if res.get(word):
-        res[word] += 1
-      else:
-        res[word] = 1
+    for row in text:
+        for word in row.strip().lower().split():
+            if res.get(word):
+                res[word] += 1
+            else:
+                res[word] = 1
 
 for it in res:
-  res_arr.append([res[it], it]) 
-  count_arr.append(res[it])
+    res_arr.append([res[it], it])
+    count_arr.append(res[it])
 
 max_count = max(count_arr)
 
@@ -41,15 +41,15 @@ res = {}
 arr = []
 
 with open('dataset_3363_3.txt') as text:
-  for row in text:
-    for word in row.strip().lower().split():
-      if res.get(word):
-        res[word] += 1
-      else:
-        res[word] = 1
+    for row in text:
+        for word in row.strip().lower().split():
+            if res.get(word):
+                res[word] += 1
+            else:
+                res[word] = 1
 
 for it in res.items():
-  arr.append([i for i in it])
+    arr.append([i for i in it])
 
 arr = sorted(arr, key=lambda x: int(x[1]))
 max = arr[len(arr) - 1][1]
